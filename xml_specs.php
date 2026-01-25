@@ -1,43 +1,36 @@
 <?php
-// Header agar browser membaca ini sebagai XML, bukan HTML biasa
-header("Content-Type: text/xml; charset=UTF-8");
-
-include 'db_connect.php';
+header("Content-type: text/xml");
+include 'db_connect.php'; // Pastikan file koneksi database Anda benar
 
 $query = "SELECT * FROM tb_specs";
-$result = mysqli_query($conn, $query);
+$result = $conn->query($query);
 
-// 1. Root Element
 echo "<?xml version='1.0' encoding='UTF-8'?>";
-echo "<katalog_gadget>";
+echo "<catalog>";
 
-while ($row = mysqli_fetch_assoc($result)) {
-    // Membersihkan karakter aneh agar tidak merusak XML
-    $model = htmlspecialchars($row['model']);
-    
-    // 2. Memulai Item Gadget
-    echo "<gadget id='sku_" . $row['sku'] . "'>";
-        echo "<model>" . $model . "</model>";
-        echo "<brand>" . $row['brand'] . "</brand>";
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        echo "<gadget id='" . $row["sku"] . "'>";
+        echo "<brand>" . $row["brand"] . "</brand>";
+        echo "<model>" . $row["model"] . "</model>";
         
-        // 3. Nested Element (Struktur Bertingkat)
         echo "<teknis>";
-            // Menambahkan Attribute 'satuan'
-            echo "<processor>" . $row['processor'] . "</processor>";
-            echo "<ram satuan='GB'>" . $row['ram_gb'] . "</ram>";
-            echo "<storage satuan='GB'>" . $row['storage_gb'] . "</storage>";
-            echo "<baterai satuan='mAh'>" . $row['battery_mah'] . "</baterai>";
-            echo "<layar tipe='" . $row['screen_type'] . "'>" . $row['screen_size'] . "</layar>";
+        echo "<processor>" . $row["processor"] . "</processor>";
+        echo "<ram>" . $row["ram_gb"] . "</ram>";
+        echo "<storage>" . $row["storage_gb"] . "</storage>";
+        echo "<layar>" . $row["screen_size"] . "</layar>";
+        
+        // --- BAGIAN BARU UNTUK SKENARIO ---
+        echo "<refresh_rate>" . $row["refresh_rate_hz"] . "</refresh_rate>";
+        echo "<battery>" . $row["battery_mah"] . "</battery>";
+        echo "<camera_mp>" . $row["main_camera_mp"] . "</camera_mp>";
+        echo "<telephoto>" . $row["has_telephoto"] . "</telephoto>";
+        // ----------------------------------
+        
         echo "</teknis>";
-        
-        echo "<fitur>";
-            echo "<nfc>" . $row['nfc_support'] . "</nfc>";
-            echo "<jaringan>" . $row['network_type'] . "</jaringan>";
-        echo "</fitur>";
-        
-    echo "</gadget>";
+        echo "</gadget>";
+    }
 }
-
-// 4. Tutup Root Element
-echo "</katalog_gadget>";
+echo "</catalog>";
+$conn->close();
 ?>

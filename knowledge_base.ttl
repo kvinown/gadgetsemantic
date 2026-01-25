@@ -1,135 +1,100 @@
 @prefix ex: <http://example.org/gadget#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema1: <http://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-ex:sku_23049PCD8G a ex:Smartphone,
-        schema1:Product ;
-    rdfs:label "Poco F5" ;
-    ex:hasBrand "Xiaomi" ;
-    ex:hasModel "Poco F5"^^xsd:string ;
-    ex:hasProcessor "Snapdragon 7+ Gen 2" ;
-    ex:hasRAM 12 ;
-    ex:hasScreenSize "6.6"^^xsd:float ;
-    ex:hasStorage 256 .
-
-ex:sku_23090RA98G a ex:Smartphone,
-        schema1:Product ;
-    rdfs:label "Redmi Note 13 Pro+ 5G" ;
-    ex:hasBrand "Xiaomi" ;
-    ex:hasModel "Redmi Note 13 Pro+ 5G"^^xsd:string ;
-    ex:hasProcessor "Dimensity 7200 Ultra" ;
-    ex:hasRAM 12 ;
-    ex:hasScreenSize "6.7"^^xsd:float ;
-    ex:hasStorage 512 .
-
-ex:sku_2311DRK48G a ex:Smartphone,
-        schema1:Product ;
+ex:2311DRK48G a ex:Smartphone ;
     rdfs:label "Poco X6 Pro" ;
+    ex:batteryCapacity 5000 ;
     ex:hasBrand "Poco" ;
-    ex:hasModel "Poco X6 Pro"^^xsd:string ;
+    ex:hasModel "Poco X6 Pro" ;
     ex:hasProcessor "Dimensity 8300 Ultra" ;
     ex:hasRAM 12 ;
-    ex:hasScreenSize "6.7"^^xsd:float ;
-    ex:hasStorage 512 .
+    ex:hasStorage 512 ;
+    ex:hasTelephoto "Tidak" ;
+    ex:mainCameraMP 64 ;
+    ex:refreshRateHz 120 .
 
-ex:sku_A3090 a ex:Smartphone,
-        schema1:Product ;
-    rdfs:label "iPhone 15" ;
-    ex:hasBrand "Apple" ;
-    ex:hasModel "iPhone 15"^^xsd:string ;
-    ex:hasProcessor "A16 Bionic" ;
-    ex:hasRAM 6 ;
-    ex:hasScreenSize "6.1"^^xsd:float ;
-    ex:hasStorage 128 .
-
-ex:sku_A3106 a ex:Smartphone,
-        schema1:Product ;
+ex:A3106 a ex:Smartphone ;
     rdfs:label "iPhone 15 Pro Max" ;
+    ex:batteryCapacity 4441 ;
     ex:hasBrand "Apple" ;
-    ex:hasModel "iPhone 15 Pro Max"^^xsd:string ;
+    ex:hasModel "iPhone 15 Pro Max" ;
     ex:hasProcessor "A17 Pro" ;
     ex:hasRAM 8 ;
-    ex:hasScreenSize "6.7"^^xsd:float ;
-    ex:hasStorage 256 .
+    ex:hasStorage 256 ;
+    ex:hasTelephoto "Ya" ;
+    ex:mainCameraMP 48 ;
+    ex:refreshRateHz 120 .
 
-ex:sku_AI2401 a ex:Smartphone,
-        schema1:Product ;
+ex:AI2401 a ex:Smartphone ;
     rdfs:label "ROG Phone 8" ;
+    ex:batteryCapacity 5500 ;
     ex:hasBrand "Asus" ;
-    ex:hasModel "ROG Phone 8"^^xsd:string ;
+    ex:hasModel "ROG Phone 8" ;
     ex:hasProcessor "Snapdragon 8 Gen 3" ;
     ex:hasRAM 16 ;
-    ex:hasScreenSize "6.7"^^xsd:float ;
-    ex:hasStorage 512 .
+    ex:hasStorage 512 ;
+    ex:hasTelephoto "Ya" ;
+    ex:mainCameraMP 50 ;
+    ex:refreshRateHz 165 .
 
-ex:sku_LI7 a ex:Smartphone,
-        schema1:Product ;
+ex:GVU6C a ex:Smartphone ;
+    rdfs:label "Pixel 7" ;
+    ex:batteryCapacity 4355 ;
+    ex:hasBrand "Google" ;
+    ex:hasModel "Pixel 7" ;
+    ex:hasProcessor "Google Tensor G2" ;
+    ex:hasRAM 8 ;
+    ex:hasStorage 128 ;
+    ex:hasTelephoto "Ya" ;
+    ex:mainCameraMP 50 ;
+    ex:refreshRateHz 90 .
+
+ex:LI7 a ex:Smartphone ;
     rdfs:label "Tecno Pova 6" ;
+    ex:batteryCapacity 6000 ;
     ex:hasBrand "Tecno" ;
-    ex:hasModel "Tecno Pova 6"^^xsd:string ;
+    ex:hasModel "Tecno Pova 6" ;
     ex:hasProcessor "Helio G99 Ultimate" ;
     ex:hasRAM 12 ;
-    ex:hasScreenSize "6.8"^^xsd:float ;
-    ex:hasStorage 256 .
+    ex:hasStorage 256 ;
+    ex:hasTelephoto "Tidak" ;
+    ex:mainCameraMP 108 ;
+    ex:refreshRateHz 120 .
 
-ex:sku_RMX3890 a ex:Smartphone,
-        schema1:Product ;
-    rdfs:label "Realme C67" ;
-    ex:hasBrand "Realme" ;
-    ex:hasModel "Realme C67"^^xsd:string ;
-    ex:hasProcessor "Snapdragon 685" ;
-    ex:hasRAM 8 ;
-    ex:hasScreenSize "6.7"^^xsd:float ;
-    ex:hasStorage 128 .
+ex:S665L a ex:Smartphone ;
+    rdfs:label "Itel RS4" ;
+    ex:batteryCapacity 5000 ;
+    ex:hasBrand "Itel" ;
+    ex:hasModel "Itel RS4" ;
+    ex:hasProcessor "Helio G99 Ultimate" ;
+    ex:hasRAM 12 ;
+    ex:hasStorage 256 ;
+    ex:hasTelephoto "Tidak" ;
+    ex:mainCameraMP 50 ;
+    ex:refreshRateHz 120 .
 
-ex:sku_SM-A057 a ex:Smartphone,
-        schema1:Product ;
+ex:SM-A057 a ex:Smartphone ;
     rdfs:label "Galaxy A05s" ;
+    ex:batteryCapacity 5000 ;
     ex:hasBrand "Samsung" ;
-    ex:hasModel "Galaxy A05s"^^xsd:string ;
+    ex:hasModel "Galaxy A05s" ;
     ex:hasProcessor "Snapdragon 680" ;
     ex:hasRAM 6 ;
-    ex:hasScreenSize "6.7"^^xsd:float ;
-    ex:hasStorage 128 .
+    ex:hasStorage 128 ;
+    ex:hasTelephoto "Tidak" ;
+    ex:mainCameraMP 50 ;
+    ex:refreshRateHz 90 .
 
-ex:sku_SM-S918 a ex:Smartphone,
-        schema1:Product ;
+ex:SM-S918 a ex:Smartphone ;
     rdfs:label "Galaxy S23 Ultra" ;
+    ex:batteryCapacity 5000 ;
     ex:hasBrand "Samsung" ;
-    ex:hasModel "Galaxy S23 Ultra"^^xsd:string ;
+    ex:hasModel "Galaxy S23 Ultra" ;
     ex:hasProcessor "Snapdragon 8 Gen 2" ;
     ex:hasRAM 12 ;
-    ex:hasScreenSize "6.8"^^xsd:float ;
-    ex:hasStorage 256 .
-
-ex:sku_SM-S921 a ex:Smartphone,
-        schema1:Product ;
-    rdfs:label "Galaxy S24" ;
-    ex:hasBrand "Samsung" ;
-    ex:hasModel "Galaxy S24"^^xsd:string ;
-    ex:hasProcessor "Exynos 2400" ;
-    ex:hasRAM 8 ;
-    ex:hasScreenSize "6.2"^^xsd:float ;
-    ex:hasStorage 256 .
-
-ex:sku_V2318 a ex:Smartphone,
-        schema1:Product ;
-    rdfs:label "Vivo V30 5G" ;
-    ex:hasBrand "Vivo" ;
-    ex:hasModel "Vivo V30 5G"^^xsd:string ;
-    ex:hasProcessor "Snapdragon 7 Gen 3" ;
-    ex:hasRAM 8 ;
-    ex:hasScreenSize "6.8"^^xsd:float ;
-    ex:hasStorage 256 .
-
-ex:sku_X6871 a ex:Smartphone,
-        schema1:Product ;
-    rdfs:label "Infinix GT 20 Pro" ;
-    ex:hasBrand "Infinix" ;
-    ex:hasModel "Infinix GT 20 Pro"^^xsd:string ;
-    ex:hasProcessor "Dimensity 8200 Ultimate" ;
-    ex:hasRAM 12 ;
-    ex:hasScreenSize "6.7"^^xsd:float ;
-    ex:hasStorage 256 .
+    ex:hasStorage 256 ;
+    ex:hasTelephoto "Ya" ;
+    ex:mainCameraMP 200 ;
+    ex:refreshRateHz 120 .
 

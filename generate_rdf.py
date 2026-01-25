@@ -11,8 +11,8 @@ g = Graph()
 g.bind("ex", EX)
 g.bind("schema", SCHEMA)
 
-# 2. Ambil Data XML (Sesuaikan URL jika beda folder)
-url_xml = "http://localhost/ws/tubes/xml_specs.php" 
+# 2. Ambil Data XML
+url_xml = "http://localhost/ws/gadgetsemantic/xml_specs.php" 
 
 print(f"Sedang mengambil data dari {url_xml}...")
 
@@ -20,48 +20,55 @@ try:
     response = requests.get(url_xml)
     if response.status_code == 200:
         root = ET.fromstring(response.content)
-        
-        print("Mulai konversi XML ke RDF...")
+        print("Mulai konversi XML ke RDF dengan Atribut Baru...")
         
         for gadget in root.findall('gadget'):
-            sku = gadget.get('id') 
+            sku = gadget.get('id')
             model_name = gadget.find('model').text
             brand_name = gadget.find('brand').text
             
             hp_uri = EX[sku] 
             
-            # Type Definition
+            # Type
             g.add((hp_uri, RDF.type, EX.Smartphone))
-            g.add((hp_uri, RDF.type, SCHEMA.Product))
             
-            # Properties
-            g.add((hp_uri, EX.hasModel, Literal(model_name, datatype=XSD.string)))
-            g.add((hp_uri, RDFS.label, Literal(model_name))) 
+            # Basic Info
+            g.add((hp_uri, RDFS.label, Literal(model_name)))
             g.add((hp_uri, EX.hasBrand, Literal(brand_name)))
+            g.add((hp_uri, EX.hasModel, Literal(model_name)))
             
-            # Teknis (Perbaikan di sini: 'is not None')
+            # Teknis
             teknis = gadget.find('teknis')
             if teknis is not None:
-                proc = teknis.find('processor').text
-                g.add((hp_uri, EX.hasProcessor, Literal(proc)))
+                # 1. RAM & Processor (Basic)
+                g.add((hp_uri, EX.hasProcessor, Literal(teknis.find('processor').text)))
+                g.add((hp_uri, EX.hasRAM, Literal(int(teknis.find('ram').text), datatype=XSD.integer)))
+                g.add((hp_uri, EX.hasStorage, Literal(int(teknis.find('storage').text), datatype=XSD.integer)))
                 
-                ram = teknis.find('ram').text
-                g.add((hp_uri, EX.hasRAM, Literal(int(ram), datatype=XSD.integer)))
+                # 2. Refresh Rate (Untuk Gaming Kompetitif)
+                rr = teknis.find('refresh_rate').text
+                g.add((hp_uri, EX.refreshRateHz, Literal(int(rr), datatype=XSD.integer)))
                 
-                storage = teknis.find('storage').text
-                g.add((hp_uri, EX.hasStorage, Literal(int(storage), datatype=XSD.integer)))
+                # 3. Baterai (Untuk Ojol/Driver)
+                bat = teknis.find('battery').text
+                g.add((hp_uri, EX.batteryCapacity, Literal(int(bat), datatype=XSD.integer)))
                 
-                screen = teknis.find('layar').text
-                g.add((hp_uri, EX.hasScreenSize, Literal(float(screen), datatype=XSD.float)))
+                # 4. Kamera (Untuk Konser)
+                cam = teknis.find('camera_mp').text
+                g.add((hp_uri, EX.mainCameraMP, Literal(int(cam), datatype=XSD.integer)))
+                
+                tele = teknis.find('telephoto').text # Ya / Tidak
+                # Kita simpan sebagai String "Ya"/"Tidak" atau Boolean
+                g.add((hp_uri, EX.hasTelephoto, Literal(tele)))
 
-        # 4. Simpan ke File
+        # Simpan ke File
         output_file = "knowledge_base.ttl"
         g.serialize(destination=output_file, format="turtle")
-        print(f"Sukses! Data RDF tersimpan di '{output_file}'")
+        print(f"✅ Sukses! Data RDF Lengkap tersimpan di '{output_file}'")
         print(f"Total Triple: {len(g)}")
         
     else:
-        print(f"Gagal mengambil XML. Kode: {response.status_code}")
+        print(f"❌ Gagal mengambil XML. Kode: {response.status_code}")
 
 except Exception as e:
-    print(f"Terjadi Error: {e}")
+    print(f"❌ Terjadi Error: {e}")
